@@ -139,7 +139,6 @@
   background-color: rgb(238, 238, 238);
   width: 40vw;
   min-width: 300px;
-  height: 25vh;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -147,18 +146,20 @@
   flex-direction: column;
   margin:2vh;
   box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.336);
+  
 }
 .avatar{
-  margin-bottom: 2vh;
+  margin: 2vh;
 }
 .postInput input{
   padding: 1vh;
   width: 90%;
+  margin: 1vh 0;
   border-radius: 5px;
 }
 .postInput button{
   width: 90%;
-  margin-top: 1vh;
+  margin: 1vh 0;
   padding: 1vh;
   background-color: rgb(76,176,80);
   color: whitesmoke;

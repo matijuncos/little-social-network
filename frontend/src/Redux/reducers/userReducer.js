@@ -18,6 +18,7 @@ const userReducer = (state = initState, action) =>{
                 loggedUser: null
             }
         case 'FOLLOW':
+            console.log(action.payload)
             return{
                 ...state,
                 loggedUser: action.payload

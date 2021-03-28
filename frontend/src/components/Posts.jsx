@@ -21,7 +21,7 @@ const Posts = ({loggedUser, getPosts, allPosts, sendNewPost, getUsers}) => {
         getUsers()
     },[getPosts, getUsers])
 
-    
+    console.log(loggedUser)
     useEffect(()=>{
       setFollowingPost(allPosts.filter(post => loggedUser._id===post.user._id || loggedUser.following.includes(post.user._id) ))
     },[allPosts, loggedUser])
@@ -57,6 +57,7 @@ const Posts = ({loggedUser, getPosts, allPosts, sendNewPost, getUsers}) => {
             </Drawer>
             <div className="postInput">
             <Avatar alt="Remy Sharp" src="https://electronicssoftware.net/wp-content/uploads/user.png" className='avatar'/>
+                <h3>{loggedUser.firstName}</h3>
                 <input type="text" value={newPost.content} name="" id="" placeholder={loggedUser ? `Hey ${loggedUser.firstName}! What's going on?` : 'Please sign in to post'} onChange={handlechange}/>
                 <button onClick={handleClick} className='sendCommentBtn'>Send</button>
             </div>

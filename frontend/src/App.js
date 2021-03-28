@@ -26,8 +26,6 @@ function App({loggedUser, preserve}) {
     links = <>
     <Switch>
         <Route exact path='/' component={Forms} />
-        <Route path='/posts' component={Posts} />
-        <Route path='/users' component={ListOfUsers} />
         <Redirect to='/'/>
     </Switch>
     </>

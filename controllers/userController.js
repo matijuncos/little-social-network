@@ -66,11 +66,11 @@ const userController = {
             const {_id, action} = req.body
             try {
                 if(action === 'follow'){
-                    await User.findByIdAndUpdate( id, {
-                        $addToSet: {following: _id}
-                    },{new: true})
                     await User.findByIdAndUpdate(_id,{
                         $addToSet: {followers: id}
+                    },{new: true})
+                    await User.findByIdAndUpdate( id, {
+                        $addToSet: {following: _id}
                     },{new: true})
                     .then (user =>{
                         res.json({
@@ -133,7 +133,6 @@ const userController = {
             }
         },
         preserveLog: async (req, res) =>{
-            console.log(req.user)
             try{
                 return res.json({
                     success: true,

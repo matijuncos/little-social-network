@@ -5,8 +5,9 @@ import Posts from './components/Posts';
 import ListOfUsers from './components/ListOfUsers'
 import {BrowserRouter as Browser, Route, Switch, Redirect} from 'react-router-dom'
 import { connect } from 'react-redux';
+import userActions from './Redux/actions/userActions';
 
-function App({loggedUser}) {
+function App({loggedUser, preserve}) {
 
 
 
@@ -19,6 +20,8 @@ function App({loggedUser}) {
         <Redirect to='/posts'/>
       </Switch>
     </>
+  }else if(!loggedUser && localStorage.getItem('token')){
+    preserve(localStorage.getItem('token'))
   }else{
     links = <>
     <Switch>
@@ -44,4 +47,8 @@ const mapStateToProps = state =>{
 
   }
 }
-export default connect(mapStateToProps)(App);
+
+const mapDispatchToProps={
+  preserve: userActions.preserve
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App);

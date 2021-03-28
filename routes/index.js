@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const passport = require('passport')
+require('../config/passport')
 const postController = require('../controllers/postController')
 const userController = require('../controllers/userController')
 
@@ -13,6 +14,8 @@ router.route('/user/signup')
 router.route('/user/signin')
 .post(userController.signIn)
 
+router.route('/user/storage')
+.post(passport.authenticate('jwt', {session:false}), userController.preserveLog)
 router.route('/following/:id')
 .post(userController.addFollowing)
 

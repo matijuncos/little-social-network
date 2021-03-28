@@ -33,19 +33,19 @@ const userActions ={
             })
         }
     },
-    // preserve: (token) =>{
-    //     return async (dispatch, getState) =>{
-    //         const response = await axios.post('http://localhost:4000/api/user/preserve', {token},{
-    //             headers:{
-    //                 Authorization: 'Bearer ' + token
-    //             }
-    //         })
-    //         dispatch({
-    //             type:'USER_LOG',
-    //             payload: response.data.response
-    //         })
-    //     }
-    // },
+    preserve: (token) =>{
+        return async (dispatch, getState) =>{
+            const response = await axios.post('http://localhost:4000/api/user/storage', {token},{
+                headers:{
+                    Authorization: 'Bearer ' + token
+                }
+            })
+            dispatch({
+                type:'USER_LOG',
+                payload: response.data.response
+            })
+        }
+    },
     follow:(id, obj)=>{
         return async (dispatch, getState) =>{
             try {

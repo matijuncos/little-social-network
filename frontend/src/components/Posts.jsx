@@ -4,9 +4,11 @@ import postActions from '../Redux/actions/postActions'
 import Post from './Post'
 import Avatar from '@material-ui/core/Avatar';
 // import ListOfUsers from './ListOfUsers';
+import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import userActions from '../Redux/actions/userActions';
 import Drawer from '@material-ui/core/Drawer';
 import { Link } from 'react-router-dom';
+import DrawerContent from './DrawerContent';
 
 const Posts = ({loggedUser, getPosts, allPosts, sendNewPost, getUsers}) => {
 
@@ -35,20 +37,22 @@ const Posts = ({loggedUser, getPosts, allPosts, sendNewPost, getUsers}) => {
             alert('signin')
         }
     }
-    // const handleDrawerOpen = () => {
-    //     setOpen(true);
-    //   };
+    const handleDrawerOpen = () => {
+        setOpen(!open);
+      };
     
       const handleDrawerClose = () => {
         setOpen(false);
       };
     return (
         <div className='postsContainer'>
+            <MenuOpenIcon onClick={handleDrawerOpen} />
             <Drawer
+                className='drawer'
                 variant="persistent"
                 anchor="left"
-                open={open}
-            >Hola
+                open={open}>
+                <DrawerContent/>
             <p onClick={handleDrawerClose}>Cerrar</p>
             </Drawer>
             <div className="postInput">

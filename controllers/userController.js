@@ -21,7 +21,7 @@ const userController = {
                 password: hash,
                 email
             }).save()
-            var token = jwtoken.sign({newUser}, process.env.SECRET_KEY, {})
+            var token = jwtoken.sign({...newUser}, process.env.SECRET_KEY, {})
             return res.json({
                 success: true,
                 response: {
@@ -29,7 +29,9 @@ const userController = {
                     firstName: newUser.firstName,
                     email: newUser.email,
                     _id: newUser._id,
-                    following:newUser.following
+                    following:newUser.following,
+                    followers: newUser.followers
+
 
 
                 }
@@ -43,7 +45,7 @@ const userController = {
                 if(!match){
                     return res.json({success: false, errors: {errors: 'Wrong credentials'} })
                 }
-                var token = jwtoken.sign({user}, process.env.SECRET_KEY, {})
+                var token = jwtoken.sign({...user}, process.env.SECRET_KEY, {})
                 return res.json({
                     success: true, 
                     response: {
@@ -51,7 +53,9 @@ const userController = {
                         firstName: user.firstName, 
                         email: user.email, 
                         _id: user._id, 
-                        following:user.following
+                        following:user.following,
+                        followers: user.followers
+
                     }})
             }else{
                 return res.json({success: false, errors: {errors: 'Wrong credentials'} })
@@ -64,6 +68,9 @@ const userController = {
                 if(action === 'follow'){
                     await User.findByIdAndUpdate( id, {
                         $addToSet: {following: _id}
+                    },{new: true})
+                    await User.findByIdAndUpdate(_id,{
+                        $addToSet: {followers: id}
                     },{new: true})
                     .then (user =>{
                         res.json({
@@ -123,6 +130,24 @@ const userController = {
                     success: false,
                     response: error
                 })
+            }
+        },
+        preserveLog: async (req, res) =>{
+            console.log(req.user)
+            try{
+                return res.json({
+                    success: true,
+                    response:{
+                        token: req.body.token,
+                        firstName: req.user.firstName, 
+                        email: req.user.lastName, 
+                        _id: req.user._id, 
+                        following: req.user.following,
+                        followers: req.user.followers
+                    }
+                })
+            }catch(err){
+                console.log(err)
             }
         }
         

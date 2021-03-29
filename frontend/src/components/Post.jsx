@@ -9,6 +9,7 @@ import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import postActions from '../Redux/actions/postActions';
 import userActions from '../Redux/actions/userActions';
+import { Link } from 'react-router-dom';
 
 const Post = ({post, loggedUser, likeAction, follow, addComment, deletePost}) => {
     const [visible, setVisible] = useState(false)
@@ -26,7 +27,6 @@ const Post = ({post, loggedUser, likeAction, follow, addComment, deletePost}) =>
         }
         setNewComment({comment: {content:''}})
     }
-    console.log(newComment)
 
     const handleChange = (e) =>{
         setNewComment({
@@ -59,10 +59,11 @@ const Post = ({post, loggedUser, likeAction, follow, addComment, deletePost}) =>
     }
     return (
         <div className="postContainer">
-
-            <div className="name">
-                {post.user.firstName} {post.user.lastName} says:
-            </div>
+            <p>
+            <Link to={`/user/${post.user._id}`} className="name">
+                 {post.user.firstName} {post.user.lastName}  
+             </Link> says:
+             </p>
             <div className="content">
                 {post.content}
             </div>

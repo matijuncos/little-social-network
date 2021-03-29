@@ -21,7 +21,6 @@ const Posts = ({loggedUser, getPosts, allPosts, sendNewPost, getUsers}) => {
         getUsers()
     },[getPosts, getUsers])
 
-    console.log(loggedUser)
     useEffect(()=>{
       setFollowingPost(allPosts.filter(post => loggedUser._id===post.user._id || loggedUser.following.includes(post.user._id) ))
     },[allPosts, loggedUser])
@@ -83,7 +82,6 @@ const mapDispatchToProps = {
     getPosts: postActions.getPosts,
     sendNewPost: postActions.newPost,
     getUsers: userActions.getUsers,
-
 
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Posts)

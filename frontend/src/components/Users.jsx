@@ -1,6 +1,7 @@
 import { Avatar } from '@material-ui/core'
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import userActions from '../Redux/actions/userActions'
 
 const Users = ({user, follow, loggedUser}) => {
@@ -18,7 +19,7 @@ const Users = ({user, follow, loggedUser}) => {
             <Avatar alt="Remy Sharp" src="https://electronicssoftware.net/wp-content/uploads/user.png" className='avatar'/>
 
             <div className="name">
-                {user.firstName} {user.lastName}
+                <Link to={`/user/${user._id}`}>{user.firstName} {user.lastName}</Link>
             </div>
             <div className="folowing">
                 <p>Followers: {user.following.length}</p>

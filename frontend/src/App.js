@@ -6,10 +6,9 @@ import ListOfUsers from './components/ListOfUsers'
 import {BrowserRouter as Browser, Route, Switch, Redirect} from 'react-router-dom'
 import { connect } from 'react-redux';
 import userActions from './Redux/actions/userActions';
+import EachUser from './components/EachUser';
 
 function App({loggedUser, preserve}) {
-
-
 
   if(loggedUser){
     var links = 
@@ -17,6 +16,7 @@ function App({loggedUser, preserve}) {
       <Switch>
         <Route path='/posts' component={Posts} />
         <Route path='/users' component={ListOfUsers} />
+        <Route exact path='/user/:id' component={EachUser}/>
         <Redirect to='/posts'/>
       </Switch>
     </>
